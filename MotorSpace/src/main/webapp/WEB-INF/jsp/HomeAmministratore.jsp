@@ -1,6 +1,8 @@
 <%@ page import="model.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <jsp:include page="HeaderAmministratore.jsp">
     <jsp:param name="pageTitle" value="Home"/>
@@ -11,6 +13,7 @@
     <link href="${pageContext.request.contextPath}/css/animate.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" href="css/bare.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+     <link rel="stylesheet" href="css/header.css" type="text/css">
 
     <!-- Slideshow -->
     <div class="slideshow-container">
@@ -86,5 +89,39 @@
         setTimeout(showSlides, 4000);
     }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toggles = document.querySelectorAll(".menu > li.caret > a");
+
+  toggles.forEach(link => {
+    link.addEventListener("click", (e) => {
+      // Evita che il link ricarichi la pagina
+      e.preventDefault();
+
+      // Trova il menu associato
+      const parent = link.parentElement;
+      const dropdown = parent.querySelector(".dropdown");
+
+      // Chiudi eventuali altri menu aperti
+      document.querySelectorAll(".menu .dropdown.show").forEach(menu => {
+        if (menu !== dropdown) menu.classList.remove("show");
+      });
+
+      // Alterna apertura/chiusura del menu corrente
+      dropdown.classList.toggle("show");
+    });
+  });
+
+  // Chiudi i menu cliccando fuori
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".menu")) {
+      document.querySelectorAll(".menu .dropdown.show").forEach(menu => {
+        menu.classList.remove("show");
+      });
+    }
+  });
+});
+</script>
+
 
 <%@include file="../footer.html"%>
