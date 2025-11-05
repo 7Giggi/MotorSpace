@@ -11,29 +11,26 @@ import java.io.IOException;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    private final UtenteDAO utenteDAO= new UtenteDAO();
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    private final UtenteDAO utenteDAO = new UtenteDAO();
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Utente utente=null;
-        if(username != null && password != null){
-            utente = utenteDAO.doRetrieveByUsernamePassword(username,password);
+
+        Utente utente = null;
+        if (username != null && password != null) {
+            utente = utenteDAO.doRetrieveByUsernamePassword(username, password);
         }
-        if(utente == null){
+
+        if (utente == null) {
             throw new MyServletException("Username e/o password non validi.");
         }
-        request.getSession().setAttribute("utente",utente);
 
-        String dest = request.getHeader("referer");
-        if(dest == null || dest.contains("/Login") || dest.trim().isEmpty()){
-            dest = ".";
-        }
-        response.sendRedirect(dest);
+        request.getSession().setAttribute("utente", utente);
+        response.sendRedirect("Home");
     }
 }
+

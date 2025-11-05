@@ -9,14 +9,20 @@
     <form action="Pagamento" method="post">
         <br>
         <label>Nome</label>
-        <input type="text" name="nome" value="${utente.nome}">
+        <input type="text" name="nome" value="${utente.nome}" readonly>
         <label>Cognome</label>
-        <input type="text" name ="cognome" value="${utente.cognome}">
+        <input type="text" name ="cognome" value="${utente.cognome}"readonly>
         <label>Email</label>
-        <input type="text" name="email" value="${utente.email}">
+        <input type="text" name="email" value="${utente.email}"readonly>
         <label>Provincia</label>
-        <select name="provincia">
-            <option value="SA">SA</option></select>
+        <select name="provincia" required>
+            <option value="">-- Seleziona --</option>
+            <option value="SA">SA</option>
+            <option value="NA">NA</option>
+            <option value="CE">CE</option>
+            <option value="AV">AV</option>
+            <option value="BN">BN</option>
+        </select>
         <label>Città</label>
         <input type="text" name="città" placeholder="Inserire la città">
         <label>Cap</label>
@@ -43,94 +49,4 @@
     </form>
 </section>
 </body>
-<script>
-    var borderOk = '2px solid #080';
-    var borderNo = '2px solid #f00';
-    var usernameOk = false;
-    var nomeOk = false;
-    var cognomeOK = false;
-    var passwordOk = false;
-    var emailOk = false;
-    var cartaOk = false;
-
-    function validaUsername(){
-        var input = document.forms['Pagamento']['username'];
-        if (input.value.length >= 6 && input.value.match(/^[0-9a-zA-Z]+$/)){
-            var xmlHttpReq = new XMLHttpRequest();
-            xmlHttpReq.onreadystatechange = function(){
-                if(this.readyState == 4 && this.status == 200 && this.responseText =='<ok/>'){
-                    usernameOk = true;
-                    input.style.border = borderOk;
-                }else{
-                    input.style.border = borderNo;
-                    usernameOk = false;
-                }
-                cambiaStatoRegistrami()
-            }
-            xmlHttpReq.open("GET","VerificaUsername?username="+encodeURIComponent(input.value),true);
-            xmlHttpReq.send();
-        }else{
-
-        }
-    }
-
-    function validaNome(){
-        var input = document.forms['Pagamento']['nome'];
-        if(input.value.trim().length > 0 && input.value().match(/^[a-zA-Z\u00C0-\u00ff]+$/)) {
-            input.style.border = borderOk;
-            nomeOk = true;
-        }else {
-            input.style.border = borderNo;
-            nomeOk = false;
-        }
-        cambiaStatoRegistrami();
-    }
-
-    function validaCognome(){
-        var input = document.forms['Pagamento']['cognome'];
-        if(input.value.trim().length > 0 && input.value().match(/^[a-zA-Z\u00C0-\u00ff]+$/)) {
-            input.style.border = borderOk;
-            nomeOk = true;
-        }else {
-            input.style.border = borderNo;
-            nomeOk = false;
-        }
-        cambiaStatoRegistrami();
-    }
-
-    function validaEmail(){
-        var input = document.forms['Pagamento']['email'];
-        if(input.value.match(/^\w+([\.-]?w+)'@\w+([\.-]?\w+)*(\.\w+)+$/)){
-            input.style.border = borderOk;
-            emailOk = true;
-        }else {
-            input.style.border = borderNo;
-            emailOk = false;
-        }
-        cambiaStatoRegistrami();
-    }
-
-    function validaCarta(){
-        var input = document.forms['Pagamento']['carta'];
-        if(input.value.match(/^\w+([\.-]?w+)'@\w+([\.-]?\w+)*(\.\w+)+$/)){
-            input.style.border = borderOk;
-            cartaOk = true;
-        }else {
-            input.style.border = borderNo;
-            emailOk = false;
-        }
-        cambiaStatoRegistrami();
-    }
-
-    function cambiaStatoRegistrami(){
-        if(usernameOk && nomeOk && cognomeOK && passwordOk && emailOk){
-            document.getElementById('registrami').disabled = false;
-            document.getElementById('registramimessaggio').innerHTML ='';
-        }else{
-            document.getElementById('registrami').disabled = true;
-            document.getElementById('registramimessaggio').innerHTML = 'Verifica che tutti i campi siano in verde.';
-        }
-    }
-
-</script>
 <%@include file="../footer.html"%>

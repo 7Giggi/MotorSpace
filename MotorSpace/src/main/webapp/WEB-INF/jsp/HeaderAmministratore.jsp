@@ -28,7 +28,7 @@
 
     <ul id="navMenu" class="menu">
 
-      <!-- Categorie -->
+      <!-- Categorie 
       <li>
         <button class="caret" type="button">Vestiario</button>
         <ul class="dropdown">
@@ -55,7 +55,7 @@
           </c:forEach>
         </ul>
       </li>
-
+-->
       <!-- Gestione amministrativa -->
       <c:if test="${amministratore != null}">
         <li>
