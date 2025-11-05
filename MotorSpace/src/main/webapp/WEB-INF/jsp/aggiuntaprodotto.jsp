@@ -11,7 +11,7 @@
     <h1>Aggiungi un nuovo prodotto</h1>
     <h5 style="color:green;">${notifica}</h5>
 
-    <form action="AggiuntaProdotto" method="post" enctype="multipart/form-data" onsubmit="return validaProdotto()">
+    <form action="AggiuntaProdotto" method="post"  onsubmit="return validaProdotto()">
         <label>Nome</label>
         <input type="text" name="nome" id="nome" placeholder="Inserisci il nome del prodotto">
         <span id="errore-nome" class="errore"></span>
@@ -42,12 +42,12 @@
         <span id="errore-categoria" class="errore"></span>
         <br>
 
-        <!-- Campo opzionale per immagine -->
+        <!-- Campo opzionale per immagine
         <label>Immagine del prodotto (opzionale)</label>
         <input type="file" name="immagine" id="immagine" accept="image/*">
         <span id="errore-immagine" class="errore"></span>
         <br><br>
-
+-->
         <input type="submit" value="Aggiungi prodotto">
     </form>
 </section>

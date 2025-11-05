@@ -18,14 +18,12 @@ function rimuoviErrore(elemento) {
 }
 
 function validaProdotto() {
-    const idStr = document.querySelector("[name='idStr']")
     const nome = document.querySelector("[name='nome']")
     const descrizione = document.querySelector("[name='descrizione']")
     const marca = document.querySelector("[name='marca']")
     const prezzo = document.querySelector("[name='prezzo']")
     const categoria = document.querySelector("[name='addCategoria']")
 
-    const regexId = /^[0-9]{1,10}$/
     const regexNome = /^[ a-zA-Z0-9]{1,50}$/
     const regexDescrizione = /^[ a-zA-Z0-9]{1,200}$/
     const regexMarca = /^[ a-zA-Z0-9]{1,50}$/
@@ -34,11 +32,7 @@ function validaProdotto() {
     let valido = true
     let primoErrore = null
 
-    if (!regexId.test(idStr.value)) {
-        mostraErrore(idStr, "L'ID deve contenere solo numeri (1-10 cifre).")
-        valido = false
-        if (!primoErrore) primoErrore = idStr
-    } else rimuoviErrore(idStr)
+
 
     if (!regexNome.test(nome.value.trim())) {
         mostraErrore(nome, "Il nome può contenere lettere e numeri (max 50 caratteri).")
@@ -78,7 +72,7 @@ function validaProdotto() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const campi = document.querySelectorAll("[name='idStr'], [name='nome'], [name='descrizione'], [name='marca'], [name='prezzo']")
+	const campi = document.querySelectorAll("[name='nome'], [name='descrizione'], [name='marca'], [name='prezzo']")
     campi.forEach(campo => {
         campo.addEventListener("blur", validaProdotto)
     })
